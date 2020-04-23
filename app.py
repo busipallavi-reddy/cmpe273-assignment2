@@ -8,6 +8,14 @@ app = Flask(__name__)
 test_id = 1
 tests = {}
 
+def format_validation(content):
+    keys_expected = ["subject", "answer_keys"]
+    keys_actual = content.keys()
+    for key in keys_actual:
+        if key not in keys_expected:
+            return False
+    return True
+
 @app.route('/')
 def hello():
     name = request.args.get("name", "World")
@@ -17,12 +25,15 @@ def hello():
 def create_test():
     global test_id
     content = request.json
-    entities = (test_id, content["subject"], json.dumps(content["answer_keys"]))
-    insert_test(entities)
-    test = {"test_id": test_id, "subject": content["subject"], "answer_keys": content["answer_keys"], "submissions": []}
-    tests[str(test_id)] = 0
-    test_id += 1
-    return test, 201
+    if format_validation(content):
+        entities = (test_id, content["subject"], json.dumps(content["answer_keys"]))
+        insert_test(entities)
+        test = {"test_id": test_id, "subject": content["subject"], "answer_keys": content["answer_keys"], "submissions": []}
+        tests[str(test_id)] = 0
+        test_id += 1
+        return test, 201
+    else:
+        return "Bad Input Format", 400
 
 @app.route('/api/tests/<int:test_id>/scantrons', methods=['POST'])
 def upload_test(test_id):
