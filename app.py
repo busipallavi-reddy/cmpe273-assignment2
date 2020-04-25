@@ -1,6 +1,6 @@
 from flask import Flask, request, redirect, url_for, send_from_directory
 from dbmodels import get_all_submissions, insert_submission, insert_test, fetch_test_keys, fetch_test, cleanup, sql_tables
-from marshmellow_schema import CreateTestSchema
+from marshmellow_schema import CreateTestSchema, UploadScantronSchema
 import os
 import json
 
@@ -12,8 +12,11 @@ app.config['SERVER_NAME'] = 'localhost:5000'
 
 test_id = 1
 tests = {}
+
+#cleanup SQLite3 tables and create new tables
 cleanup()
 sql_tables()
+
 
 @app.route('/api/tests', methods=['POST'])
 def create_test():
@@ -40,6 +43,10 @@ def upload_file(test_id):
     scantron_url = url_for('uploaded_file', filename=filename, _external=True)
     f = open(UPLOAD_FOLDER + "/" + filename)
     content = json.load(f)
+    json_validator = UploadScantronSchema()
+    errors = json_validator.validate(content)
+    if errors:
+        return errors, 400
     answer_keys = json.loads(fetch_test_keys(test_id))
     answered_keys = content["answers"]
     result = {}
@@ -57,6 +64,7 @@ def upload_file(test_id):
     tests[str(test_id)] += 1
     return submission, 201
 
+
 @app.route('/api/tests/<int:test_id>', methods=['GET'])
 def get_test(test_id):
     test_details = fetch_test(test_id)
@@ -67,6 +75,7 @@ def get_test(test_id):
                 "score": submission[5], "result": json.loads(submission[6])}
         response_obj["submissions"].append(subm)
     return response_obj, 201
+
 
 @app.route('/files/<filename>')
 def uploaded_file(filename):
