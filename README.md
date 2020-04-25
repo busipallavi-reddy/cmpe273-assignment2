@@ -13,9 +13,41 @@
 
 * files/ folder - All the uploaded files are store here.
 
-* The files are downloadable by doing a GET request on the scantron_url returned.
+* The uploaded files are downloadable by doing a GET request on the scantron_url returned.
 
 
+
+## Installation and Execution
+
+* Installing sqlite and sqlite browser
+
+  ```
+  $ sudo apt-get update
+  $ sudo apt-get install sqlite3
+  $ sudo apt-get install sqlitebrowser
+  ```
+
+* Installing pipenv, flask, marshmallow, sqlite3
+
+  ```
+  pip install pipenv
+  
+  pipenv install flask==1.1.1
+  
+  pip install sqlite3
+  
+  pip install marshmallow
+  
+  pipenv shell
+  ```
+
+* Run app.py 
+
+  ```
+  env FLASK_APP=app.py flask run
+  ```
+
+  
 
 # APIs
 
