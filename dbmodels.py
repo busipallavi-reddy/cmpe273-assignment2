@@ -12,8 +12,8 @@ def sql_connection():
 def sql_tables(con):
     cursorObj = con.cursor()
     cursorObj.execute("CREATE TABLE test(test_id integer PRIMARY KEY, subject text, answer_keys text)")
-    cursorObj.execute("CREATE TABLE submissions(test_id integer, scantron_id integer, name text, subject text, score integer, \
-                      result text, PRIMARY KEY(test_id, scantron_id))")
+    cursorObj.execute("CREATE TABLE submissions(test_id integer, scantron_id integer, scantron_url text, name text, \
+                      subject text, score integer, result text, PRIMARY KEY(test_id, scantron_id))")
     con.commit()
 
 def insert_test(entities):
@@ -27,7 +27,7 @@ def insert_submission(entities):
     con = sql_connection()
     cursorObj = con.cursor()
     cursorObj.execute(
-        'INSERT INTO submissions(test_id, scantron_id, name, subject, score, result) VALUES(?, ?, ?, ?, ?, ?)', entities)
+        'INSERT INTO submissions(test_id, scantron_id, scantron_url, name, subject, score, result) VALUES(?, ?, ?, ?, ?, ?, ?)', entities)
     con.commit()
 
 def fetch_test_keys(test_id):
