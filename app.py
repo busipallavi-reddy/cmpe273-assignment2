@@ -1,5 +1,6 @@
-from flask import Flask, escape, request, redirect, url_for, send_from_directory
-from dbmodels import get_all_submissions, insert_submission, insert_test, fetch_test_keys, fetch_test
+from flask import Flask, request, redirect, url_for, send_from_directory
+from dbmodels import get_all_submissions, insert_submission, insert_test, fetch_test_keys, fetch_test, cleanup, sql_tables
+from marshmellow_schema import CreateTestSchema
 import os
 import json
 
@@ -11,33 +12,25 @@ app.config['SERVER_NAME'] = 'localhost:5000'
 
 test_id = 1
 tests = {}
-
-def format_validation(content):
-    keys_expected = ["subject", "answer_keys"]
-    keys_actual = content.keys()
-    for key in keys_actual:
-        if key not in keys_expected:
-            return False
-    return True
-
-@app.route('/')
-def hello():
-    name = request.args.get("name", "World")
-    return f'Hello, {escape(name)}!'
+cleanup()
+sql_tables()
 
 @app.route('/api/tests', methods=['POST'])
 def create_test():
     global test_id
     content = request.json
-    if format_validation(content):
-        entities = (test_id, content["subject"], json.dumps(content["answer_keys"]))
-        insert_test(entities)
-        test = {"test_id": test_id, "subject": content["subject"], "answer_keys": content["answer_keys"], "submissions": []}
-        tests[str(test_id)] = 0
-        test_id += 1
-        return test, 201
-    else:
-        return "Bad Input Format", 400
+    json_validator = CreateTestSchema()
+    errors = json_validator.validate(content)
+    print(errors)
+    if errors:
+        return errors, 400
+    entities = (test_id, content["subject"], json.dumps(content["answer_keys"]))
+    insert_test(entities)
+    test = {"test_id": test_id, "subject": content["subject"], "answer_keys": content["answer_keys"], "submissions": []}
+    tests[str(test_id)] = 0
+    test_id += 1
+    return test, 201
+
 
 @app.route('/api/tests/<int:test_id>/scantrons', methods=['POST'])
 def upload_file(test_id):

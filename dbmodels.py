@@ -9,7 +9,8 @@ def sql_connection():
     except Error:
         print(Error)
 
-def sql_tables(con):
+def sql_tables():
+    con = sql_connection()
     cursorObj = con.cursor()
     cursorObj.execute("CREATE TABLE test(test_id integer PRIMARY KEY, subject text, answer_keys text)")
     cursorObj.execute("CREATE TABLE submissions(test_id integer, scantron_id integer, scantron_url text, name text, \
@@ -54,6 +55,8 @@ def get_all_submissions(test_id):
     rows = cursorObj.fetchall()
     return rows
 
-if __name__ == "__main__":
+def cleanup():
     con = sql_connection()
-    sql_tables(con)
+    cursorObj = con.cursor()
+    cursorObj.execute("DROP TABLE test")
+    cursorObj.execute("DROP TABLE submissions")
