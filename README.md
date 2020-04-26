@@ -183,6 +183,10 @@
 
 ![](https://github.com/busipallavi-reddy/cmpe273-assignment2/blob/master/Postman%20Screenshots/create_test_1.png)
 
+Marshmallow Schema validation is also done and errors are shown in the following screenshot.
+
+![](https://github.com/busipallavi-reddy/cmpe273-assignment2/blob/master/Postman%20Screenshots/create_test_invalid_json.png)
+
 ## 
 
 ## Upload a scantron
@@ -230,6 +234,10 @@ curl -F 'data=@path/to/local/scantron-1.json' http://localhost:5000/api/tests/1/
 The scantron URL is downloadable as seen below in the screenshot - 
 
 ![](https://github.com/busipallavi-reddy/cmpe273-assignment2/blob/master/Postman%20Screenshots/downlaod_scantron.png)
+
+Marshmallow Schema validation is also done and errors are shown in the following screenshot.
+
+![](https://github.com/busipallavi-reddy/cmpe273-assignment2/blob/master/Postman%20Screenshots/upload_file_invalid_json.png)
 
 
 
