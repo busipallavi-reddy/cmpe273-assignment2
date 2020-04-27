@@ -196,7 +196,7 @@ Marshmallow Schema validation is also done and errors are shown in the following
 > POST <http://localhost:5000/api/tests/1/scantrons>
 
 ```
-curl -F 'data=@path/to/local/scantron-1.json' http://localhost:5000/api/tests/1/scantrons
+curl -F 'data=@scantron-1.json' http://localhost:5000/api/tests/1/scantrons
 ```
 
 *Response*
