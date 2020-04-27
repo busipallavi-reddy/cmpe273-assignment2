@@ -17,6 +17,8 @@
 
 * Postman/cmpe273-assignment2.postman_collection.json - The Postman collection
 
+* output.txt - File containing curl requests and responses
+
 
 
 ## Installation and Execution
