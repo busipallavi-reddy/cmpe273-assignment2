@@ -181,11 +181,11 @@
 }
 ```
 
-![](https://github.com/busipallavi-reddy/cmpe273-assignment2/blob/master/Postman%20Screenshots/create_test_1.png)
+![](https://github.com/busipallavi-reddy/cmpe273-assignment2/blob/master/Postman/create_test_1.png)
 
 Marshmallow Schema validation is also done and errors are shown in the following screenshot.
 
-![](https://github.com/busipallavi-reddy/cmpe273-assignment2/blob/master/Postman%20Screenshots/create_test_invalid_json.png)
+![](https://github.com/busipallavi-reddy/cmpe273-assignment2/blob/master/Postman/create_test_invalid_json.png)
 
 ## 
 
@@ -227,17 +227,17 @@ curl -F 'data=@scantron-1.json' http://localhost:5000/api/tests/1/scantrons
 }
 ```
 
-![](https://github.com/busipallavi-reddy/cmpe273-assignment2/blob/master/Postman%20Screenshots/upload_scantron_1.png)
+![](https://github.com/busipallavi-reddy/cmpe273-assignment2/blob/master/Postman/upload_scantron_1.png)
 
-![](https://github.com/busipallavi-reddy/cmpe273-assignment2/blob/master/Postman%20Screenshots/upload_scantron_2.png)
+![](https://github.com/busipallavi-reddy/cmpe273-assignment2/blob/master/Postman/upload_scantron_2.png)
 
 The scantron URL is downloadable as seen below in the screenshot - 
 
-![](https://github.com/busipallavi-reddy/cmpe273-assignment2/blob/master/Postman%20Screenshots/downlaod_scantron.png)
+![](https://github.com/busipallavi-reddy/cmpe273-assignment2/blob/master/Postman/downlaod_scantron.png)
 
 Marshmallow Schema validation is also done and errors are shown in the following screenshot.
 
-![](https://github.com/busipallavi-reddy/cmpe273-assignment2/blob/master/Postman%20Screenshots/upload_file_invalid_json.png)
+![](https://github.com/busipallavi-reddy/cmpe273-assignment2/blob/master/Postman/upload_file_invalid_json.png)
 
 
 
@@ -519,6 +519,6 @@ Marshmallow Schema validation is also done and errors are shown in the following
 }
 ```
 
-![](https://github.com/busipallavi-reddy/cmpe273-assignment2/blob/master/Postman%20Screenshots/get_test_submissions_1.png)
+![](https://github.com/busipallavi-reddy/cmpe273-assignment2/blob/master/Postman/get_test_submissions_1.png)
 
-![](https://github.com/busipallavi-reddy/cmpe273-assignment2/blob/master/Postman%20Screenshots/get_test_submissions_2.png)
+![](https://github.com/busipallavi-reddy/cmpe273-assignment2/blob/master/Postman/get_test_submissions_2.png)
