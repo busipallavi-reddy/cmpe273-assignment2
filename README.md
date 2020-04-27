@@ -15,7 +15,7 @@
 
 * The uploaded files are downloadable by doing a GET request on the scantron_url returned.
 
-* cmpe273-assignment2.postman_collection.json - The Postman collection
+* Postman/cmpe273-assignment2.postman_collection.json - The Postman collection
 
 
 
